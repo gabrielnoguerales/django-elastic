@@ -29,6 +29,7 @@ class Descuento(models.Model):
 class Categoria(ImageModel):
     CARPETA="Categoria"
 
+    foto = models.ImageField(upload_to=CARPETA, blank=True)
     descuento = models.ForeignKey(Descuento,on_delete=models.CASCADE)
 
     def __str__(self):
@@ -37,6 +38,7 @@ class Categoria(ImageModel):
 class Producto(ImageModel):
     CARPETA = "Producto"
 
+    foto = models.ImageField(upload_to=CARPETA, blank=True)
     descripcion = models.TextField()
     precio_base = models.FloatField()
     categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
