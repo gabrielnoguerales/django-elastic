@@ -5,3 +5,5 @@ Pillow
 whitenoise
 django-jazzmin
 django-allauth
+ipython
+djangorestframework
