@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - postgres-vol:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./src:/opt/code
+      - ./imgs:/opt/imgs
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - elastic
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    container_name: elastic
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+
+volumes:
+  postgres-vol:
+  data01:
+    driver: local
