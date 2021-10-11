@@ -6,10 +6,9 @@ from django.db import models
 
 # Create your models here.
 class ImageModel(models.Model):
-    CARPETA=""
 
     titulo = models.CharField(max_length=100,blank=False,null=False)
-    foto = models.ImageField(upload_to=CARPETA, blank=True)
+    foto = models.ImageField(upload_to="", blank=True)
     url_foto = models.URLField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
