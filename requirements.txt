@@ -1,5 +1,5 @@
 Django>=3.0,<4.0
-psycopg2-binary>=2.8
+psycopg2>=2.8
 django-elasticsearch-dsl
 Pillow
 whitenoise
@@ -7,3 +7,5 @@ django-jazzmin
 django-allauth
 ipython
 djangorestframework
+phonenumbers
+Django-phonenumber-field
