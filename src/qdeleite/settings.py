@@ -41,7 +41,8 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-    'productos'
+    'productos',
+    'clientes'
 ]
 
 LOAD_FIRST_APPS = [
@@ -54,6 +55,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'rangefilter',
 ]
 
 INSTALLED_APPS = LOAD_FIRST_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -143,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 
@@ -156,7 +158,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = '/opt/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"), # your static/ files folder
+]
 MEDIA_ROOT = '/opt/imgs/'
 MEDIA_URL = '/media/'
 
@@ -176,8 +181,14 @@ JAZZMIN_SETTINGS = {
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Qdeleite",
-}
 
+    "changeform_format": "collapsible",
+    "related_modal_active": "True",
+    "custom_css": "css/admin.css",
+}
+JAZZMIN_UI_TWEAKS = {
+    "sidebar_nav_compact_style": "True",
+}
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
@@ -192,3 +203,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+PHONENUMBER_DEFAULT_REGION="ES"

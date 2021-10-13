@@ -1,4 +1,4 @@
-from elasticsearch_dsl.query import Q, MultiMatch, SF, Range
+from elasticsearch_dsl.query import Q
 from .documents import ProductDocument
 
 def get_search_products_query(phrase):
