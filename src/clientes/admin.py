@@ -1,11 +1,14 @@
 from django.contrib import admin
-# Register your models here.
+from rangefilter.filters import DateTimeRangeFilter
+
 from .models import Cliente, Reserva
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ['nombre','telefono','ultima_visita_con_reserva','ver_reservas','notas' ]
-    def ver_reservas(self, obj):
+    list_display = ['nombre','telefono','ultima_visita_con_reserva','reservas','notas' ]
+    readonly_fields = ["ultima_visita_con_reserva",'reservas']
+    search_fields = ['nombre','telefono']
+    def reservas(self, obj):
         from django.urls import reverse
         from django.utils.http import urlencode
         from django.utils.html import format_html
@@ -21,4 +24,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Reserva)
 class ReservaAdmin(admin.ModelAdmin):
+    search_fields = ['cliente__nombre', 'cliente__telefono']
     list_display = ['cliente','fecha','comensales']
+    list_filter =(('fecha',DateTimeRangeFilter),)
+    date_hierarchy = 'fecha'

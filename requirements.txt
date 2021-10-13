@@ -9,3 +9,4 @@ ipython
 djangorestframework
 phonenumbers
 Django-phonenumber-field
+django-admin-rangefilter

@@ -1,0 +1,85 @@
+.datetime {
+    margin-right: 3em !important;
+}
+
+.admindatefilter {
+    display: flex;
+}
+
+.clock-icon {
+    background: none !important;
+}
+
+.date-icon {
+    background: none !important;
+}
+
+.calendarbox {
+    margin: 5px auto !important;
+    font-size: 12px !important;
+    width: 19em !important;
+    text-align: center !important;
+    background: white !important;
+}
+
+#timelist {
+    background-color: white;
+}
+
+#calendarin1 {
+    margin-top: 2em !important;
+}
+
+.vDateField {
+    margin-top: 1em;
+    margin-bottom: 1em !important;
+}
+
+
+div.form-group :not(#search_group) :not(.btn) {
+    max-width: 80%;
+    min-width: 20%;
+    width: -webkit-fill-available;
+    padding-right: 1em;
+}
+#changelist-search h3{
+    font-size: 1em;
+    font-weight: bold;
+    margin-left: 1em;
+}
+@media (max-width: 763px) {
+    .card-tools {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .card-header {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-top: 1em;
+    }
+
+    .admindatefilter {
+        flex-direction: column;
+    }
+
+    #changelist-search {
+        padding-bottom: 2em;
+        flex-direction: column;
+    }
+    .select2-selection__arrow{
+        display: none;
+    }
+}
+
+@media (min-width: 764px) {
+    .controls {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-right: 1em;
+    }
+}

@@ -18,5 +18,5 @@ class Cliente(models.Model):
 
 class Reserva(models.Model):
     cliente = models.ForeignKey(to=Cliente,on_delete=models.CASCADE,related_name="reservas")
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(verbose_name="Fecha de la reserva")
     comensales = models.IntegerField(verbose_name="Numero de comensales")
