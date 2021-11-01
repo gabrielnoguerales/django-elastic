@@ -1,36 +1,48 @@
+# Start the app using docker-compose pull && docker-compose up to make sure you have the latest image
 services:
-  db:
-    image: postgres
-    restart: always
-    volumes:
-      - postgres-vol:/var/lib/postgresql/data
-    env_file: .env
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./src:/opt/code
-      - ./imgs:/opt/imgs
-    env_file: .env
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-      - elastic
+    db:
+        image: postgres
+        restart: always
+        command: postgres -c config_file=/etc/postgresql.conf
+        volumes:
+            - postgres-vol:/var/lib/postgresql/data
+            - ./logs:/logs
+            - ./Postgresql.conf:/etc/postgresql.conf
+        env_file: .env
+        deploy:
+            resources:
+                limits:
+                    memory: 4G
 
-  elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
-    container_name: elastic
-    environment:
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    volumes:
-      - data01:/usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
+    web:
+        build: .
+        command: bash -c "
+            python qdeleite/checkdb.py --service-name postgres --ip db --port 5432 &&
+            python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
+        volumes:
+            - ./src:/opt/code
+            - ./imgs:/opt/imgs
+        env_file: .env
+        ports:
+            - "8000:8000"
+        depends_on:
+            - db
+            - elastic
+
+    elastic:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+        container_name: elastic
+        environment:
+            - discovery.type=single-node
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        volumes:
+            - data01:/usr/share/elasticsearch/data
+        ports:
+            - "9200:9200"
 
 volumes:
-  postgres-vol:
-  data01:
-    driver: local
+    postgres-vol:
+    data01:
+        driver: local

@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i9u7m+63x3-b@spaolvqx#9$d+5%h8w6-tvwq$hboo=nmbt5=2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['Django-debug'],
 
 ALLOWED_HOSTS = []
 
@@ -46,7 +46,7 @@ LOCAL_APPS = [
 ]
 
 LOAD_FIRST_APPS = [
-    'jazzmin'
+    'jazzmin',
 ]
 
 THIRD_PARTY_APPS = [
@@ -55,7 +55,6 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'rangefilter',
 ]
 
 INSTALLED_APPS = LOAD_FIRST_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -65,6 +64,8 @@ ELASTICSEARCH_DSL={
         'hosts': 'elastic:9200'
     },
 }
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -143,7 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'Europe/Madrid'
 

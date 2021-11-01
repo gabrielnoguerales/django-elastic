@@ -26,32 +26,28 @@
     background-color: white;
 }
 
-#calendarin1 {
-    margin-top: 2em !important;
+#calendarin1, #calendarin0 {
+    margin-top: 2.5em !important;
 }
 
-.vDateField {
+.vTimeField, .vDateField{
     margin-top: 1em;
     margin-bottom: 1em !important;
+    min-width: fit-content;
 }
 
-
-div.form-group :not(#search_group) :not(.btn) {
-    max-width: 80%;
-    min-width: 20%;
-    width: -webkit-fill-available;
-    padding-right: 1em;
-}
-#changelist-search h3{
+#changelist-search h3 {
     font-size: 1em;
     font-weight: bold;
     margin-left: 1em;
 }
+
 @media (max-width: 763px) {
     .card-tools {
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
+        margin-top: 1rem;
     }
 
     .card-header {
@@ -69,8 +65,19 @@ div.form-group :not(#search_group) :not(.btn) {
         padding-bottom: 2em;
         flex-direction: column;
     }
-    .select2-selection__arrow{
-        display: none;
+
+    div.form-group:not([class*='field-']){
+        max-width: 80%;
+        min-width: 20%;
+        display: flex;
+        width: -webkit-fill-available;
+        justify-content: center;
+    }
+
+    div.form-group input#searchbar {
+        width: -webkit-fill-available;
+        padding-right: 1em;
+        margin-bottom: 1rem !important;
     }
 }
 
@@ -82,4 +89,10 @@ div.form-group :not(#search_group) :not(.btn) {
         justify-content: space-around;
         margin-right: 1em;
     }
+}
+
+.select2-container {
+    width: available !important;
+    width: -moz-available !important;
+    width: -webkit-fill-available !important;
 }

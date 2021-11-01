@@ -7,7 +7,19 @@ from .models import Producto, Categoria, Descuento
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
-
+    fieldsets = (
+        (None, {
+            'classes': 'wide',
+            'fields': ('titulo', 'descripcion', 'categoria')
+        }),
+        ('Precio', {
+            'classes':'wide',
+            'fields': ('precio_base', 'descuento'),
+        }),
+        ('Foto', {
+            'fields': ('foto', 'url_foto'),
+        }),
+    )
     def image_tag(self, obj):
         return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.foto.url))
 
